@@ -1,0 +1,24 @@
+package it.almaviva.difesa.template.shared.util;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Getter
+public enum StatusEnum {
+
+//    CANNOT_SAVE_DATA("CANNOT_SAVE_DATA"),
+//    CANNOT_UPDATE_DATA("CANNOT_UPDATE_DATA"),
+//    CANNOT_DELETE_DATA("CANNOT_DELETE_DATA"),
+    CANNOT_DELETE_USER_PRIVILEGE("CANNOT_DELETE_USER_PRIVILEGE"),
+//    DATE_FORMAT_ERROR ("DATE_FORMAT_ERROR"),
+//    END_DATE_BEFORE_START_DATE("END_DATE_BEFORE_START_DATE"),
+//    ENTITY_NOT_FINDABLE_PARAMETER("ENTITY_NOT_FINDABLE_PARAMETER");
+    INTERNAL_SERVER_ERROR("INTERNAL_SERVER_ERROR"),
+    TEMPLATE_NAME_AND_TYPE_ALREADY_EXITST("TEMPLATE_NAME_AND_TYPE_ALREADY_EXITST");
+
+
+
+
+    private final String nameMessage;
+}

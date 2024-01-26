@@ -1,0 +1,55 @@
+server:
+  port: ${HTTP_PORT:8083}
+  servlet:
+    context-path: ${CONTEXT_PATH:/template-api}
+  max-http-header-size: ${MAX_HTTP_HEADER_SIZE:50KB}
+
+spring:
+  application:
+    name: TEMPLATE-API
+
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:postgresql://gedoc-postgres.cobctxxlaup3.eu-west-1.rds.amazonaws.com:5432/postgres?currentSchema=sipad_cessazione}
+    username: ${DATASOURCE_USER:postgres}
+    password: ${DATASOURCE_PWD:Almaviva1234!}
+
+  data:
+    web: # DATA WEB (SpringDataWebProperties)
+      pageable:
+        default-page-size: 20         # Default page size.
+        max-page-size: 2000           # Maximum page size to be accepted.
+        one-indexed-parameters: false # Whether to expose and assume 1-based page number indexes.
+        page-parameter: page          # Page index parameter name.
+        prefix:                       # General prefix to be prepended to the page number and page size parameters.
+        qualifier-delimiter: _        # Delimiter to be used between the qualifier and the actual page number and size properties.
+        size-parameter: size          # Page size parameter name.
+        sort-parameter: sort          # Sort parameter name.
+
+  freemarker:
+    check-template-location: false
+
+jwt:
+  header: ${JWT_HEADER:Authorization-Cess}
+  secret: ${JWT_SECRET:36DAD9C1C9A790EAA3F02FFCAA6EAFD41E1D9507557C42871001A24D984D88B20656BC76856B93A16CCD6D6F74D956047E8FFDE65DEA38AD8194383ADD3906A1}
+  expiration: ${JWT_EXPIRATION:7200}
+
+ms.sipad:
+  port: 8089
+  context-path: /ms-sipad-api
+  base.url: ${MS_SIPAD_API_URL:localhost:${ms.sipad.port}${ms.sipad.context-path}}
+  find-user: /user/findById
+
+logging:
+  file:
+    path: ${LOGGING_PATH:./logs}
+    name: ${LOGGING_NAME:logs/${spring.application.name}.log}
+  level:
+    it.almaviva.difesa: ${LOGGING_LEVEL:INFO}
+    reactor.netty.http.client: ${LOGGING_LEVEL:INFO}
+  logback:
+    rollingpolicy:
+      max-history: ${LOGGING_HISTORY:5}
+      max-file-size: ${LOGGING_MAX_SIZE:10MB}
+  pattern:
+    console: "%-30(%d{dd-MM-yyyy HH:mm:ss.SSS} %highlight(%-5level) %magenta([%thread]) %cyan(%logger{10}) %yellow([%file:%line]) : %msg%throwable%n)"
+    file: "%-30(%d{dd-MM-yyyy HH:mm:ss.SSS} %highlight(%-5level) %magenta([%thread]) %cyan(%logger{10}) %yellow([%file:%line]) : %msg%throwable%n)"
